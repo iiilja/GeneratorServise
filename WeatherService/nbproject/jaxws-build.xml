@@ -26,24 +26,24 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-service-NewWebServiceFromWSDL" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/service/NewWebServiceFromWSDL"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/service/NewWebServiceFromWSDL" destdir="${build.generated.dir}/jax-wsCache/service/NewWebServiceFromWSDL" wsdl="${basedir}/${conf-dir}xml-resources/web-services/NewWebServiceFromWSDL/wsdl/WeatherService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-services/NewWebServiceFromWSDL/wsdl/WeatherService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/service/NewWebServiceFromWSDL"/>
+    <target name="wsimport-service-WeatherWebServiceFromWSDL" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/service/WeatherWebServiceFromWSDL"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/service/WeatherWebServiceFromWSDL" destdir="${build.generated.dir}/jax-wsCache/service/WeatherWebServiceFromWSDL" wsdl="${basedir}/${conf-dir}xml-resources/web-services/WeatherWebServiceFromWSDL/wsdl/WeatherService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-services/WeatherWebServiceFromWSDL/wsdl/WeatherService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/service/WeatherWebServiceFromWSDL"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/service/NewWebServiceFromWSDL">
+            <fileset dir="${build.generated.dir}/jax-wsCache/service/WeatherWebServiceFromWSDL">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
-        <copy todir="${build.web.dir}/WEB-INF/wsdl/NewWebServiceFromWSDL">
-            <fileset dir="${basedir}/${conf-dir}xml-resources/web-services/NewWebServiceFromWSDL/wsdl/"/>
+        <copy todir="${build.web.dir}/WEB-INF/wsdl/WeatherWebServiceFromWSDL">
+            <fileset dir="${basedir}/${conf-dir}xml-resources/web-services/WeatherWebServiceFromWSDL/wsdl/"/>
         </copy>
     </target>
-    <target name="wsimport-service-clean-NewWebServiceFromWSDL" depends="-init-project">
+    <target name="wsimport-service-clean-WeatherWebServiceFromWSDL" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/namespace/webservice/_new"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/service/NewWebServiceFromWSDL"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/service/WeatherWebServiceFromWSDL"/>
     </target>
-    <target name="wsimport-service-generate" depends="wsimport-service-NewWebServiceFromWSDL"/>
+    <target name="wsimport-service-generate" depends="wsimport-service-WeatherWebServiceFromWSDL"/>
 </project>

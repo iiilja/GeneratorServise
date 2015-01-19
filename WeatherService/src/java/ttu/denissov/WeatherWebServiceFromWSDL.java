@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 
-package ttu.veebi.denissov;
+package ttu.denissov;
 
-import com.sun.faces.util.CollectionsUtils;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,15 +23,16 @@ import namespace.webservice._new.SpecWeatherType;
 import namespace.webservice._new.SpecifiedWeatherElementResponse;
 import namespace.webservice._new.TempTypeEnumOut;
 import namespace.webservice._new.WeatherElementList;
-import namespace.webservice._new.WeatherElementList.*;
+import namespace.webservice._new.WeatherElementList.WeatherElement;
+import namespace.webservice._new.WeatherService;
 import namespace.webservice._new.WeatherTypes;
 
 /**
  *
  * @author ilja
  */
-@WebService(serviceName = "WeatherService", portName = "NewPort", endpointInterface = "namespace.webservice._new.WeatherServicePortType", targetNamespace = "http://new.webservice.namespace", wsdlLocation = "WEB-INF/wsdl/NewWebServiceFromWSDL/WeatherService.wsdl")
-public class WeatherService {
+@WebService(serviceName = "WeatherService", portName = "NewPort", endpointInterface = "namespace.webservice._new.WeatherServicePortType", targetNamespace = "http://new.webservice.namespace", wsdlLocation = "WEB-INF/wsdl/WeatherWebServiceFromWSDL/WeatherService.wsdl")
+public class WeatherWebServiceFromWSDL {
 
     public SpecifiedWeatherElementResponse getSpecifiedWeather(WeatherTypes parameter) {
         SpecifiedWeatherElementResponse response = new SpecifiedWeatherElementResponse();

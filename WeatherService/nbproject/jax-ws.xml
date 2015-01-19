@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-    <service name="NewWebServiceFromWSDL">
-      <implementation-class>ttu.veebi.denissov.NewWebServiceFromWSDL</implementation-class>
+    <service name="WeatherWebServiceFromWSDL">
+      <implementation-class>ttu.denissov.WeatherWebServiceFromWSDL</implementation-class>
       <wsdl-url>file:/D:/Универ/Veebiteenused/WeatherService.wsdl</wsdl-url>
       <local-wsdl-file>WeatherService.wsdl</local-wsdl-file>
       <service-name>WeatherService</service-name>

@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 
-package ttu.veebi.denissov;
+package ttu.denissov;
 
-import java.util.ArrayList;
 import java.util.Date;
 import namespace.webservice._new.WeatherElementList.WeatherElement;
 

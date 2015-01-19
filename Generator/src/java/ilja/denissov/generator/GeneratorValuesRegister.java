@@ -49,8 +49,10 @@ public class GeneratorValuesRegister {
         List<PowerAccordingToWeather> outList = new ArrayList<>();
         for (GeneratorValues value : getAllValues()) {
                 PowerAccordingToWeather patw;
-                Date begin = value.getDate();
-                cal.setTime(begin);
+                
+                cal.setTime(value.getDate());
+                cal.set(calendarType == Calendar.DAY_OF_YEAR ? Calendar.HOUR_OF_DAY : Calendar.MINUTE , 0);
+                Date begin = cal.getTime();
                 cal.add(calendarType, 1);
                 Date end = cal.getTime();
                 patw = findPowerAccordingToWeather(outList, begin, end);
@@ -69,7 +71,7 @@ public class GeneratorValuesRegister {
                     }
                 }
                 patw.addValues(value.getAmps()*value.getVoltage(),
-                        calendarType, calendarType, calendarType, calendarType, calendarType, end);
+                        celsius, wind, value.getAmps(), value.getVoltage(), value.getRpm(), end);
             }
         return outList;
     }
@@ -88,7 +90,7 @@ public class GeneratorValuesRegister {
     public @WebResult(name = "GeneratorValue") List<GeneratorValues> getAllValues(){
         
         Calendar cal = Calendar.getInstance();
-        cal.set(2014, 12, 12, 21, 37);
+        cal.set(2014, 12, 12, 20, 37);
         List<GeneratorValues> list = new ArrayList<>();
         list.add(new GeneratorValues(0.5F, 0.6F, 200, cal.getTime()));
         

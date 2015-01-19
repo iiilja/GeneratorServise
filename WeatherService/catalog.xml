@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://www.w3schools.com/webservices/tempconvert.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/tempconvert/wsdl/www.w3schools.com/webservices/tempconvert.asmx.wsdl"/>
-    <system systemId="file:/D:/Универ/Veebiteenused/WeatherService.wsdl" uri="src/conf/xml-resources/web-services/WeatherService/wsdl/WeatherService.wsdl"/>
+    <system systemId="file:/D:/Универ/Veebiteenused/WeatherService.wsdl" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/WeatherService.wsdl"/>
 </catalog>

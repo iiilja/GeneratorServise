@@ -28,15 +28,19 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="WeatherElement" >
+			<xs:element name="WeatherElementList" >
 				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="windSpeed" type="xs:decimal" minOccurs="1" maxOccurs = "1"/>
-						<xs:element name="temp" type="tns:tempTypeEnumOut" minOccurs="1" maxOccurs = "1"/>
-						<xs:element name="moist" type="xs:decimal" minOccurs="1" maxOccurs = "1"/>
-						<xs:element name="clouds" type="xs:string" minOccurs="1" maxOccurs = "1"/>
-						<xs:element name="date" type="tns:dateType" minOccurs="1" maxOccurs = "1"/>
-					</xs:sequence>
+					<xs:element name="WeatherElement" minOccurs = "0" maxOccurs = "unbounded" >
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="windSpeed" type="xs:decimal" minOccurs="1" maxOccurs = "1"/>
+								<xs:element name="temp" type="tns:tempTypeEnumOut" minOccurs="1" maxOccurs = "1"/>
+								<xs:element name="moist" type="xs:decimal" minOccurs="1" maxOccurs = "1"/>
+								<xs:element name="clouds" type="xs:string" minOccurs="1" maxOccurs = "1"/>
+								<xs:element name="date" type="tns:dateType" minOccurs="1" maxOccurs = "1"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
 				</xs:complexType>
 			</xs:element>
 			<xs:complexType name = "specWeatherType">
@@ -92,7 +96,7 @@
 	<wsdl:message name="getAllWeather"/>
 
 	<wsdl:message name="getAllWeatherResponse">
-		<wsdl:part name="parameter" element="tns:WeatherElement"/>
+		<wsdl:part name="parameter" element="tns:Weather"/>
 	</wsdl:message>
 	<wsdl:portType name="WeatherServicePortType">
 		<wsdl:operation name="getSpecifiedWeather">

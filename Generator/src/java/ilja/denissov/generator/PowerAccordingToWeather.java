@@ -6,24 +6,35 @@
 
 package ilja.denissov.generator;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 /**
  *
  * @author ilja
  */
 public class PowerAccordingToWeather {
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "powerPo")
     private float power;
-    private float celsius;
-    private float wind;
-    private Date date;
+    private BigDecimal celsius;
+    private BigDecimal wind;
+    private Date dateBegin;
+    private Date dateEnd;
     private Float amps;
     private Float voltage;
     private Integer rpm;
 
-    public void addValues(float power, float celsius, float wind, float amps, float voltage, int rpm, Date date) {
+    public PowerAccordingToWeather(Date begin, Date end) {
+        this.dateBegin = begin;
+        this.dateEnd = end;
+    }
+    
+    
+
+    public void addValues(float power, float amps, float voltage, int rpm, Date dateBegin, Date dateEnd) {
         this.power = (this.power + power)/2;
-        this.celsius = (this.celsius + celsius)/2;
-        this.wind = (this.wind + wind)/2;
         this.amps = (this.amps + amps)/2;
         this.voltage = (this.voltage + voltage)/2;
         this.rpm = (this.rpm + rpm)/2;
@@ -39,21 +50,22 @@ public class PowerAccordingToWeather {
         this.power = power;
     }
 
-    public float getWind() {
+    public BigDecimal getWind() {
         return wind;
     }
 
-    public void setWind(float wind) {
+    public void setWind(BigDecimal wind) {
         this.wind = wind;
     }
 
-    public Float getCelsius() {
+    public BigDecimal getCelsius() {
         return celsius;
     }
 
-    public void setCelsius(float celsius) {
+    public void setCelsius(BigDecimal celsius) {
         this.celsius = celsius;
     }
+    
 
     public float getAmps() {
         return amps;
@@ -63,12 +75,20 @@ public class PowerAccordingToWeather {
         this.amps = amps;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateBegin() {
+        return dateBegin;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateBegin(Date dateBegin) {
+        this.dateBegin = dateBegin;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public int getRpm() {

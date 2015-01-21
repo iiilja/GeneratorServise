@@ -17,8 +17,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -44,20 +42,24 @@ public class GeneratorValuesRegister {
     public @WebResult(name = "PowerAccordingToWeather") List<PowerAccordingToWeather> getPowerAccordingToWeather(
             @WebParam(name = "TimeType") TimeCalendarType type,
             @WebParam(name = "OptionalGeneratorData") OptionalGeneratorData optionalGeneratorData){
+        System.out.println((type == null) + " TYPE = NULL");
+        if (type == null) {
+            type = TimeCalendarType.HOUR;
+        }
         if (type.equals(TimeCalendarType.DAY)) {
-            return sortValuesForType(Calendar.DAY_OF_YEAR);
+            return sortValuesForType(Calendar.DAY_OF_YEAR,optionalGeneratorData);
         }
         else if (type.equals(TimeCalendarType.HOUR)) {
-            return sortValuesForType(Calendar.HOUR_OF_DAY);
+            return sortValuesForType(Calendar.HOUR_OF_DAY,optionalGeneratorData);
         }
 
         return null;
     }
     
-    private List<PowerAccordingToWeather> sortValuesForType(int calendarType){
+    private List<PowerAccordingToWeather> sortValuesForType(int calendarType, OptionalGeneratorData optionalData){
         Calendar cal = Calendar.getInstance();
         List<PowerAccordingToWeather> outList = new ArrayList<>();
-        for (GeneratorValues value : getAllValues()) {
+        for (GeneratorValue value : getAllValues()) {
             PowerAccordingToWeather patw;
 
             cal.setTime(value.getDate());
@@ -68,10 +70,18 @@ public class GeneratorValuesRegister {
             patw = findPowerAccordingToWeather(outList, begin, end);
             if (patw == null) {
                 patw = new PowerAccordingToWeather(begin,end);
-
             }
-            patw.addValues(value.getAmps()*value.getVoltage(),
-                    value.getAmps(), value.getVoltage(), value.getRpm(),begin, end);
+            if (optionalData.isAmps() != null && optionalData.isAmps()) {
+                patw.addAmps(value.getAmps());
+            }
+            if (optionalData.isRpm()!= null && optionalData.isRpm()) {
+                patw.addRpm(value.getRpm());
+            }
+            if (optionalData.isVoltage()!= null && optionalData.isVoltage()) {
+                patw.addVoltage(value.getVoltage());
+            }
+            patw.addPower((int) (value.getAmps()* value.getVoltage()));
+            outList.add(patw);
         }
         List<PowerAccordingToWeather> outListNew = new ArrayList<>();
         for (PowerAccordingToWeather pAtW : outList) {
@@ -87,6 +97,8 @@ public class GeneratorValuesRegister {
                 pAtW.setCelsius(specWeatherType.getTemp().getCelsius());
                 pAtW.setWind(specWeatherType.getWindSpeed());
                 outListNew.add(pAtW);
+            } else {
+                System.out.println("if (weatherTypes == null or weatherTypes.isEmpty())");
             }
         }
         return outListNew;
@@ -103,45 +115,45 @@ public class GeneratorValuesRegister {
     }
     
     @WebMethod(operationName = "GetAllGeneratorValues")
-    public @WebResult(name = "GeneratorValues") List<GeneratorValues> getAllValues(){
+    public @WebResult(name = "GeneratorValue") List<GeneratorValue> getAllValues(){
         
         Calendar cal = Calendar.getInstance();
         cal.set(2014, 12, 12, 20, 37);
-        List<GeneratorValues> list = new ArrayList<>();
-        list.add(new GeneratorValues(0.5F, 0.6F, 200, cal.getTime()));
+        List<GeneratorValue> list = new ArrayList<>();
+        list.add(new GeneratorValue(0.5F, 0.6F, 200, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add(new GeneratorValues(5.4F, 22.0F, 1200, cal.getTime()));
+        list.add(new GeneratorValue(5.4F, 22.0F, 1200, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add(new GeneratorValues(10.6F, 20.4F, 750, cal.getTime()));
+        list.add(new GeneratorValue(10.6F, 20.4F, 750, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add(new GeneratorValues(15.5F, 26.1F, 1475, cal.getTime()));
+        list.add(new GeneratorValue(15.5F, 26.1F, 1475, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add( new GeneratorValues(1.5F, 5.3F, 469, cal.getTime()));
+        list.add( new GeneratorValue(1.5F, 5.3F, 469, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add( new GeneratorValues(7.9F, 11.6F, 681, null));
+        list.add( new GeneratorValue(7.9F, 11.6F, 681, cal.getTime()));
         
         cal.add(Calendar.DAY_OF_YEAR, 1);
-        list.add(new GeneratorValues(0.5F, 0.6F, 200, cal.getTime()));
+        list.add(new GeneratorValue(0.5F, 0.6F, 200, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add(new GeneratorValues(5.4F, 22.0F, 1200, cal.getTime()));
+        list.add(new GeneratorValue(5.4F, 22.0F, 1200, cal.getTime()));
         
         cal.add(Calendar.DAY_OF_YEAR, 1);
-        list.add(new GeneratorValues(10.6F, 20.4F, 750, cal.getTime()));
+        list.add(new GeneratorValue(10.6F, 20.4F, 750, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add(new GeneratorValues(15.5F, 26.1F, 1475, cal.getTime()));
+        list.add(new GeneratorValue(15.5F, 26.1F, 1475, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add( new GeneratorValues(1.5F, 5.3F, 469, cal.getTime()));
+        list.add( new GeneratorValue(1.5F, 5.3F, 469, cal.getTime()));
         
         cal.add(Calendar.HOUR_OF_DAY, 1);
-        list.add( new GeneratorValues(7.9F, 11.6F, 681, cal.getTime()));
+        list.add( new GeneratorValue(7.9F, 11.6F, 681, cal.getTime()));
 
         return list;
     }

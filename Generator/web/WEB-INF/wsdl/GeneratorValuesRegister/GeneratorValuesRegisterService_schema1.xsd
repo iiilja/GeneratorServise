@@ -1,69 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema version="1.0" targetNamespace="http://my.org/ns/" xmlns:tns="http://my.org/ns/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <xs:element name="GetAllGeneratorValues" type="tns:GetAllGeneratorValues"/>
+  <xs:element name="GetAllGeneratorValues" type="tns:GetAllGeneratorValues"/>
 
-    <xs:element name="GetAllGeneratorValuesResponse" type="tns:GetAllGeneratorValuesResponse"/>
+  <xs:element name="GetAllGeneratorValuesResponse" type="tns:GetAllGeneratorValuesResponse"/>
 
-    <xs:element name="GetAvgPowerAccordingToWeatherAndType" type="tns:GetAvgPowerAccordingToWeatherAndType"/>
+  <xs:element name="GetAvgPowerAccordingToWeatherAndType" type="tns:GetAvgPowerAccordingToWeatherAndType"/>
 
-    <xs:element name="GetAvgPowerAccordingToWeatherAndTypeResponse" type="tns:GetAvgPowerAccordingToWeatherAndTypeResponse"/>
+  <xs:element name="GetAvgPowerAccordingToWeatherAndTypeResponse" type="tns:GetAvgPowerAccordingToWeatherAndTypeResponse"/>
 
-    <xs:complexType name="GetAllGeneratorValues">
-        <xs:sequence/>
-    </xs:complexType>
+  <xs:complexType name="GetAllGeneratorValues">
+    <xs:sequence/>
+  </xs:complexType>
 
-    <xs:complexType name="GetAllGeneratorValuesResponse">
-        <xs:sequence>
-            <xs:element name="GeneratorValue" type="tns:generatorValues" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+  <xs:complexType name="GetAllGeneratorValuesResponse">
+    <xs:sequence>
+      <xs:element name="GeneratorValue" type="tns:generatorValues" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
 
-    <xs:complexType name="generatorValues">
-        <xs:sequence>
-            <xs:element name="amps" type="xs:float"/>
-            <xs:element name="date" type="xs:dateTime" minOccurs="0"/>
-            <xs:element name="rpm" type="xs:int"/>
-            <xs:element name="voltage" type="xs:float"/>
-        </xs:sequence>
-    </xs:complexType>
+  <xs:complexType name="generatorValues">
+    <xs:sequence>
+      <xs:element name="amps" type="xs:float"/>
+      <xs:element name="date" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="rpm" type="xs:int"/>
+      <xs:element name="voltage" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
 
-    <xs:complexType name="GetAvgPowerAccordingToWeatherAndType">
-        <xs:sequence>
-            <xs:element name="TimeType" type="tns:timeTypeEnum" minOccurs="0"/>
-            <xs:element name="OptionalGeneratorData" type="tns:optionalGeneratorData" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:simpleType name="timeTypeEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="DAY"/>
-            <xs:enumeration value="HOUR"/>
-        </xs:restriction>
-    </xs:simpleType>
+  <xs:complexType name="GetAvgPowerAccordingToWeatherAndType">
+    <xs:sequence>
+      <xs:element name="TimeType" type="tns:timeCalendarType" minOccurs="0"/>
+      <xs:element name="OptionalGeneratorData" type="tns:optionalGeneratorData" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
 
-    <xs:complexType name="optionalGeneratorData">
-        <xs:sequence>
-            <xs:element name="amps" type="xs:boolean" minOccurs="0"  maxOccurs = "1"/>
-            <xs:element name="rpm" type="xs:boolean" minOccurs="0"  maxOccurs = "1"/>
-            <xs:element name="voltage" type="xs:boolean" minOccurs="0"  maxOccurs = "1"/>
-        </xs:sequence>
-    </xs:complexType>
+  <xs:complexType name="optionalGeneratorData">
+    <xs:sequence>
+      <xs:element name="amps" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="rpm" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="voltage" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
 
-    <xs:complexType name="GetAvgPowerAccordingToWeatherAndTypeResponse">
-        <xs:sequence>
-            <xs:element name="PowerAccordingToWeather" type="tns:powerAccordingToWeather" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+  <xs:complexType name="GetAvgPowerAccordingToWeatherAndTypeResponse">
+    <xs:sequence>
+      <xs:element name="PowerAccordingToWeather" type="tns:powerAccordingToWeather" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
 
-    <xs:complexType name="powerAccordingToWeather">
-        <xs:all>
-            <xs:element name="amps" type="xs:float" minOccurs="0" maxOccurs = "1"/>
-            <xs:element name="date" type="xs:dateTime" minOccurs="1" maxOccurs = "1"/>
-            <xs:element name="power" type="xs:float" minOccurs="1" maxOccurs = "1"/>
-            <xs:element name="rpm" type="xs:int" minOccurs="0" maxOccurs = "1"/>
-            <xs:element name="voltage" type="xs:float" minOccurs="0" maxOccurs = "1"/>
-            <xs:element name="wind" type="xs:float" minOccurs="1" maxOccurs = "1"/>
-        </xs:all>
-    </xs:complexType>
+  <xs:complexType name="powerAccordingToWeather">
+    <xs:all>
+      <xs:element name="amps" type="xs:float" minOccurs="0"/>
+      <xs:element name="celsius" type="xs:decimal"/>
+      <xs:element name="dateBegin" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="dateEnd" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="power" type="xs:float"/>
+      <xs:element name="rpm" type="xs:int" minOccurs="0"/>
+      <xs:element name="voltage" type="xs:float" minOccurs="0"/>
+      <xs:element name="wind" type="xs:decimal"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:simpleType name="timeCalendarType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DAY"/>
+      <xs:enumeration value="HOUR"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
 

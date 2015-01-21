@@ -15,32 +15,19 @@ import javax.xml.bind.annotation.XmlSchemaType;
  * @author ilja
  */
 public class PowerAccordingToWeather {
-    @XmlElement(required = true)
-    @XmlSchemaType(name = "powerPo")
     private float power;
     private BigDecimal celsius;
     private BigDecimal wind;
     private Date dateBegin;
     private Date dateEnd;
-    private Float amps;
-    private Float voltage;
+    private BigDecimal amps;
+    private BigDecimal voltage;
     private Integer rpm;
 
     public PowerAccordingToWeather(Date begin, Date end) {
         this.dateBegin = begin;
         this.dateEnd = end;
     }
-    
-    
-
-    public void addValues(float power, float amps, float voltage, int rpm, Date dateBegin, Date dateEnd) {
-        this.power = (this.power + power)/2;
-        this.amps = (this.amps + amps)/2;
-        this.voltage = (this.voltage + voltage)/2;
-        this.rpm = (this.rpm + rpm)/2;
-    }
-
-    
     
     public float getPower() {
         return power;
@@ -65,14 +52,20 @@ public class PowerAccordingToWeather {
     public void setCelsius(BigDecimal celsius) {
         this.celsius = celsius;
     }
-    
 
-    public float getAmps() {
+    public BigDecimal getAmps() {
         return amps;
     }
 
-    public void setAmps(float amps) {
+    public void setAmps(BigDecimal amps) {
         this.amps = amps;
+    }
+
+    public void addAmps(float amps) {
+        if (this.amps == null) {
+            this.amps = new BigDecimal(0);
+        }
+        this.amps = (this.amps.add(BigDecimal.valueOf(amps))).divide(new BigDecimal(2));
     }
 
     public Date getDateBegin() {
@@ -91,20 +84,42 @@ public class PowerAccordingToWeather {
         this.dateEnd = dateEnd;
     }
 
-    public int getRpm() {
+    public Integer getRpm() {
         return rpm;
     }
 
-    public void setRpm(int rpm) {
+    public void setRpm(Integer rpm) {
         this.rpm = rpm;
     }
 
-    public float getVoltage() {
+    
+
+    public void addRpm(int rpm) {
+        if (this.rpm == null) {
+            this.rpm = new Integer(0);
+        }
+        this.rpm = (int)(this.rpm+ rpm)/2;
+    }
+
+    public void addVoltage(float voltage) {
+        if (this.voltage == null) {
+            this.voltage = new BigDecimal(0);
+        }
+        this.voltage = (this.voltage.add(BigDecimal.valueOf(voltage))).divide(new BigDecimal(2));
+    }
+    
+    public void addPower(int power){
+        this.power = (this.power + power)/2;
+    }
+
+    public BigDecimal getVoltage() {
         return voltage;
     }
 
-    public void setVoltage(float voltage) {
+    public void setVoltage(BigDecimal voltage) {
         this.voltage = voltage;
     }
+    
+    
 
 }

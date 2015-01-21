@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://www.webservicex.net/globalweather.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/globalweather/wsdl/www.webservicex.net/globalweather.asmx.wsdl"/>
+    <system systemId="http://ilja-pc:8080/WeatherService/WeatherService?wsdl" uri="src/conf/xml-resources/web-service-references/WeatherService/wsdl/ilja-pc_8080/WeatherService/WeatherService.wsdl"/>
 </catalog>

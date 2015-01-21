@@ -8,20 +8,20 @@ import javax.jws.WebParam;
  *
  * @author ilja.denissov
  */
-public class GeneratorValues {
+public class GeneratorValue {
     private float amps;
     private float voltage;
     private int rpm;
     private Date date;
 
-    public GeneratorValues(float amps, float voltage, int rpm, Date date) {
+    public GeneratorValue(float amps, float voltage, int rpm, Date date) {
         this.amps = amps;
         this.voltage = voltage;
         this.rpm = rpm;
         this.date = date;
     }
 
-    public GeneratorValues() {
+    public GeneratorValue() {
     }
 
     public float getAmps() {

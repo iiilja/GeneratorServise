@@ -28,8 +28,9 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="WeatherElementList" >
-				<xs:complexType>
+			<xs:element name="WeatherElementResponce" >
+                            <xs:complexType>
+                                <xs:sequence>
 					<xs:element name="WeatherElement" minOccurs = "0" maxOccurs = "unbounded" >
 						<xs:complexType>
 							<xs:sequence>
@@ -41,12 +42,13 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-				</xs:complexType>
+                                </xs:sequence>
+                            </xs:complexType>
 			</xs:element>
 			<xs:complexType name = "specWeatherType">
 				<xs:sequence>
 					<xs:element name="windSpeed" type="xs:decimal" minOccurs="0" maxOccurs = "1"/>
-					<xs:element name="temp" type="tns:tempTypeEnumOut" minOccurs="0" maxOccurs = "1"/>
+					<xs:element name="temp" type="tns:tempTypeEnumOutChoise" minOccurs="0" maxOccurs = "1"/>
 					<xs:element name="moist" type="xs:decimal" minOccurs="0" maxOccurs = "1"/>
 					<xs:element name="clouds" type="xs:string" minOccurs="0" maxOccurs = "1"/>
 					<xs:element name="date" type="tns:dateType" minOccurs="1" maxOccurs = "1"/>
@@ -59,6 +61,12 @@
 				</xs:restriction>
 			</xs:simpleType>
 			<xs:complexType name="tempTypeEnumOut">
+				<xs:sequence>
+					<xs:element name="celsius" type = "tns:CelsiusType"/>
+					<xs:element name="fahrenheit" type = "tns:FahrenheitType"/>
+				</xs:sequence>
+			</xs:complexType>
+                        <xs:complexType name="tempTypeEnumOutChoise">
 				<xs:choice>
 					<xs:element name="celsius" type = "tns:CelsiusType"/>
 					<xs:element name="fahrenheit" type = "tns:FahrenheitType"/>
@@ -80,9 +88,8 @@
 			</xs:simpleType>
 			<xs:simpleType name = "dateType">
 				<xs:restriction base="xs:dateTime">
-					<xs:minInclusive value="2014-01-01"/>
-					<xs:maxInclusive value="2015-01-01"/>
-					<xs:pattern value=".{10}"/>
+					<xs:minInclusive value="2014-01-12T22:37:42.135+02:00"/>
+					<xs:maxInclusive value="2015-05-12T22:37:42.135+02:00"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:schema>
@@ -96,7 +103,7 @@
 	<wsdl:message name="getAllWeather"/>
 
 	<wsdl:message name="getAllWeatherResponse">
-		<wsdl:part name="parameter" element="tns:WeatherElementList"/>
+		<wsdl:part name="parameter" element="tns:WeatherElementResponce"/>
 	</wsdl:message>
 	<wsdl:portType name="WeatherServicePortType">
 		<wsdl:operation name="getSpecifiedWeather">

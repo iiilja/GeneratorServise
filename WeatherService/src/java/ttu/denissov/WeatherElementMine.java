@@ -7,7 +7,7 @@
 package ttu.denissov;
 
 import java.util.Date;
-import namespace.webservice._new.WeatherElementList.WeatherElement;
+import namespace.webservice._new.WeatherElementResponce.WeatherElement;
 
 /**
  *

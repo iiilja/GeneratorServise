@@ -30,7 +30,7 @@
 			</xs:element>
 			<xs:element name="WeatherElementList" >
 				<xs:complexType>
-					<xs:element name="WeatherElement" minOccurs = "0" maxOccurs = "unbounded" >
+					<xs:element name="WeatherElement" minOccurs = "0" >
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="windSpeed" type="xs:decimal" minOccurs="1" maxOccurs = "1"/>
@@ -80,8 +80,8 @@
 			</xs:simpleType>
 			<xs:simpleType name = "dateType">
 				<xs:restriction base="xs:dateTime">
-					<xs:minInclusive value="2014-01-01"/>
-					<xs:maxInclusive value="2015-01-01"/>
+					<xs:minInclusive value="2004-12-30T09:00:00"/>
+					<xs:maxInclusive value="2015-05-30T09:00:00"/>
 					<xs:pattern value=".{10}"/>
 				</xs:restriction>
 			</xs:simpleType>
